@@ -15,11 +15,17 @@ test("Verify dynamic movie ticket booking flow in PVR Cinemas website", async({p
     await page.getByRole('button', {name:"Accept"}).click()
     const primeSeat = page.locator('span[id*="PRIME ROWS"].seat-current-pvr').first()
     const seatId = await primeSeat.getAttribute('id')
-    const clickedNumber = seatId!.split('|')[1].replace(':', '')
-    //.replace(/[^/w]+/g,'')
-    await primeSeat.click()
-    const SeatInfo = page.locator('//div[@class= "seat-number"]/p')//.innerText()
-    await expect(SeatInfo).toContainText(clickedNumber)
+    if (seatId) {
+        const clickedNumber = seatId.split('|')[1].replace(':', '');
+        //.replace(/[^/w]+/g,'')
+        console.log(`Successfully captured: ${clickedNumber}`);
+        await primeSeat.click();
+        const SeatInfo = page.locator('//div[@class= "seat-number"]/p')//.innerText()
+        await expect(SeatInfo).toContainText(clickedNumber)
+    } 
+    else {
+        throw new Error("CRITICAL FAILURE: The selected seat has no ID attribute!");
+    }
     // verify if total is displayed
     await expect(page.getByText("Grand-Total")).toBeVisible
     const pageTitle = await page.title()
