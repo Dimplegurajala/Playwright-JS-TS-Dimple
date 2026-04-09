@@ -20,16 +20,18 @@ test("File Upload Assesment", async({page})=>{
     await page.getByRole('option', {name: "Banking"}).click()
     //save and assert the new account
     await page.getByRole('button', {name:"Save"}).last().click()
-    const successToast = page.locator('//span[contains(@class,"toastMessage")]')
+    const successToast = page.locator('.toastMessage')
     await expect(successToast).toBeVisible()
     await expect(successToast).toContainText("Dimple Asha")
     //upload File and assert the uploaded file
     await page.locator('input[type="file"]').setInputFiles('data/appu.png');
     await page.waitForTimeout(2000)
-    const Upload= page.getByRole('button',{name:"Done"})
-    await expect(Upload).toBeEnabled()
-    await Upload.click()
-    const UploadSuccess = page.locator('//div[contains(@id, "toastDescription")]/span')
+    const DoneBtn= page.getByRole('button',{name:"Done"})
+    await expect(DoneBtn).toBeEnabled()
+    await DoneBtn.click()
+    const UploadSuccess = page.locator('//div[contains(@id, "toastDescription")]')
     await expect(UploadSuccess).toBeVisible()
     await expect(UploadSuccess).toContainText("1 file was added to the Account.")
 })
+
+ 
