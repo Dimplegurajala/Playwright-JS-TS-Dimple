@@ -36,8 +36,8 @@ for(let data of value){
         //select country as IND using value from Drop Down
         await page.locator("#createLeadForm_generalCountryGeoId").selectOption({value:data.Country})
         //select state from Drop down and count states and print all states to console
-        await page.locator("#createLeadForm_generalStateProviceGeoId").selectOption({label:data.State})
-        const StateDD = page.locator("#createLeadForm_generalStateProviceGeoId option")
+        await page.locator("#createLeadForm_generalStateProvinceGeoId").selectOption({label:data.State})
+        const StateDD = page.locator("#createLeadForm_generalStateProvinceGeoId option")
         const StateCount = await StateDD.count()
         console.log(`The total number of states are :${StateCount}`)
         const allOptionsState = await StateDD.allInnerTexts()
