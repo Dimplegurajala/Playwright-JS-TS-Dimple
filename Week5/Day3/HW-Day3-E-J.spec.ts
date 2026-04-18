@@ -1,4 +1,4 @@
-//env + JSON specific-- Data Parametrization-using storage session
+//env + JSON specific-- Data Parametrization
 import{test,expect} from '@playwright/test'
 import dotenv from "dotenv"
 import fs from "fs"
